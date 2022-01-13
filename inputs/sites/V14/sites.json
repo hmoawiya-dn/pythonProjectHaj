@@ -1,0 +1,33 @@
+{ "sites": [
+    {
+      "name": "New York",
+      "city": "City: new york | State: New York",
+      "state":"New York",
+      "region":"New York",
+      "zip": "404000",
+      "ip:": "200",
+      "lat": "40.71",
+      "lng":"-74.01"
+    },
+    {
+      "name": "Israel",
+      "city": "Taibee",
+      "state":"Taibee",
+      "region":"Merkaz",
+      "zip": "404000",
+      "ip:": "200",
+      "lat": "40.71",
+      "lng":"-74.01"
+    },
+    {
+      "name": "Israel-Taibee",
+      "city": "Taibee-Mosholash",
+      "state":"Taibee-Mosholash",
+      "region":"Center",
+      "zip": "404000",
+      "ip:": "200",
+      "lat": "1",
+      "lng":"1"
+    }
+  ]
+}

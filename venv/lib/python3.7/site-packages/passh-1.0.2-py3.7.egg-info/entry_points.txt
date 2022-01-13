@@ -1,0 +1,3 @@
+[console_scripts]
+passh = passh:main
+

@@ -1,0 +1,27 @@
+{
+  "id": null,
+  "name": "test10",
+  "groupId": "8b35162d-a6ac-4cc3-a7de-2105c06823a1",
+  "siteId": "6931bfc0-9096-4265-9de7-a1ab5310b8c8",
+  "candidateStack": "TestDeploy",
+  "formation": { "type": "Cluster", "specific": "CL-16"},
+  "configurationData": null,
+  "inBandIpv4Address": "",
+  "inBandIpv4Subnet": "",
+  "oobIpv4DefaultGateway": null,
+  "isOOBIpv4DHCP": false,
+  "isOOBIpv6DHCP": false,
+  "oobIpv4Address": "11.111.11.11",
+  "oobIpv4Subnet": "20",
+  "oobIpv6Address": null,
+  "oobIpv6Subnet": null,
+  "oobIpv6DefaultGateway": null,
+  "nccs": [
+    {
+      "serialNumber": "giSimulatour_S5O7_CL-16_NCC1",
+      "hostName": "giSimulatour_S5O7_CL-16_NCC1",
+      "nccId": 0,
+      "type": "RoutingEngine"
+    }
+  ]
+}

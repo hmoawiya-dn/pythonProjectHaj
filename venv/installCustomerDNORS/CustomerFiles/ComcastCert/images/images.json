@@ -1,0 +1,25 @@
+{
+  "dnos_images": [
+    {
+      "fileName": "",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v15_2/dnos_15.2.0.6.tar",
+      "fileInput": "",
+      "isBaseOs": "False",
+      "description": "",
+      "name": "dnos_15.2.0.6",
+      "originalFileName": "dnos_15.2.0.6.tar",
+      "imageType": "dnos_image"
+    },
+    {
+     "fileName": "",
+      "url": "http://minioio.dev.drivenets.net:9000/prereq-pkgs/prereq_dnos_15.1.0.7.tar",
+      "description": "",
+      "fileInput": null,
+      "name": "prereq_dnos_15.1.0.7",
+      "originalFileName": "prereq_dnos_15.1.0.7.tar",
+      "siSupported": false,
+      "username": "superadmin",
+      "imageType": "dnos_prerequisite"
+    }
+  ]
+}

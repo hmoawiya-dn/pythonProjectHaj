@@ -1,0 +1,14 @@
+{
+  "dnos_images": [
+    {
+      "fileName": "",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v11_5_10/dnos_11.5.10.8.tar",
+      "fileInput": "",
+      "isBaseOs": "False",
+      "description": "",
+      "name": "dnos_11.5.10.8",
+      "originalFileName": "dnos_11.5.10.8.tar",
+      "imageType": "dnos_image"
+    }
+  ]
+}

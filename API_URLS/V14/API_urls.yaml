@@ -1,0 +1,8 @@
+login_request_url : "/api/login"
+add_users_url : "/api/users/dnorUser"
+add_images_url : "/api/image-management"
+download-image :
+add_sites_url : "/api/sites"
+add_tacacs_url : "/api/aaa/aaaConfiguration"
+add_radius_url : "/api/aaa/aaaConfiguration"
+add_syslog_servers_url : "/api/syslog/settings"
