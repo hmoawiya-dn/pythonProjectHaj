@@ -1,0 +1,19 @@
+{
+  "dnos_images":
+  [
+    {
+      "packageMethodType": "url",
+      "urls":
+      [
+        {
+          "fileName": "drivenets_dnos_16.2.0.5_priv.rel_v16_2_tata.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_16.2.0.5_priv.rel_v16_2_tata.tar"
+        }
+      ],
+      "newStack": {
+      "stackName": "DNOS-V16.2",
+      "stackDescription": "DNOS Only"
+      }
+    }
+  ]
+}
