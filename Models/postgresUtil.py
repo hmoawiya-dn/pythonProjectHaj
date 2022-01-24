@@ -15,7 +15,7 @@ class postgresUtil:
                 port='5432',
                 password="s9etcq89WThKreA8j9he")
             cursor = conn.cursor()
-            print(f'executing query={query} on postgress db on server{server}')
+            print(f'executing query={query} on postgress db on server {server}')
             cursor.execute(query)
             records = cursor.fetchall()
             print('result=')

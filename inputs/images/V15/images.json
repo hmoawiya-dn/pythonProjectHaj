@@ -20,8 +20,8 @@
       "urls":
       [
         {
-          "fileName": "drivenets_dnos_16.1.0.9.tar",
-          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_16.1.0.9.tar"
+          "fileName": "drivenets_dnos_16.1.0.10.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_16.1.0.10.tar"
         }
       ],
       "newStack": {

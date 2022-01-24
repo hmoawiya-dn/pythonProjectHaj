@@ -1,0 +1,33 @@
+{
+  "dnos_images":
+  [
+    {
+      "packageMethodType": "url",
+      "urls":
+      [
+        {
+          "fileName": "drivenets_baseos_2.3940000001.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_baseos_2.3940000001.tar"
+        }
+      ],
+      "newStack": {
+      "stackName": "NTTBaseOS2.394",
+      "stackDescription": "BaseOS Stack Only"
+      }
+    },
+    {
+      "packageMethodType": "url",
+      "urls":
+      [
+        {
+          "fileName": "drivenets_dnos_16.1.1.1.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_16.1.1.1.tar"
+        }
+      ],
+      "newStack": {
+      "stackName": "NTTDNOS16.1.1.1",
+      "stackDescription": "DNOS Stack Only"
+      }
+    }
+  ]
+}

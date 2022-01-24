@@ -175,7 +175,7 @@ def test25_add_Syslog_servers_to_DNOR():
 @pytest.mark.addinputs
 def test26_add_sites_to_DNOR():
     global authorizationToken
-    sites = open('inputs/sites/sites.json')
+    sites = open('inputs/sites/SiteGroups.json')
     data = json.load(sites)
     url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/sites'
     for site in data['sites']:
