@@ -12,15 +12,44 @@
     },
     {
       "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.21.tar",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.12.tar",
       "fileInput": "",
       "isBaseOs": "False",
       "description": "",
-      "name": "dnos_13.3.2.21",
-      "originalFileName": "dnos_13.3.2.21.tar",
+      "name": "dnos_13.3.2.12",
+      "originalFileName": "dnos_13.3.2.12.tar",
       "imageType": "dnos_image"
     },
-
+    {
+      "fileName": "",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.24.tar",
+      "fileInput": "",
+      "isBaseOs": "False",
+      "description": "",
+      "name": "dnos_13.3.2.24",
+      "originalFileName": "dnos_13.3.2.24.tar",
+      "imageType": "dnos_image"
+    },
+    {
+      "fileName": "",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.28.tar",
+      "fileInput": "",
+      "isBaseOs": "False",
+      "description": "",
+      "name": "dnos_13.3.2.28",
+      "originalFileName": "dnos_13.3.2.28.tar",
+      "imageType": "dnos_image"
+    },
+    {
+      "fileName": "",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.30.tar",
+      "fileInput": "",
+      "isBaseOs": "False",
+      "description": "",
+      "name": "dnos_13.3.2.30",
+      "originalFileName": "dnos_13.3.2.30.tar",
+      "imageType": "dnos_image"
+    },
     {
       "fileName": "",
       "url": "http://minioio.dev.drivenets.net:9000/prereq-pkgs/prereq_dnos_11.5.7.3.tar",
@@ -40,36 +69,7 @@
       "name": "prereq_dnos_13.3.1.6",
       "originalFileName": "prereq_dnos_13.3.1.6.tar",
       "imageType": "dnos_prerequisite"
-    },
-     {
-      "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.23.tar",
-      "fileInput": "",
-      "isBaseOs": "False",
-      "description": "",
-      "name": "dnos_13.3.2.23",
-      "originalFileName": "dnos_13.3.2.23.tar",
-      "imageType": "dnos_image"
-    },
-     {
-      "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.24.tar",
-      "fileInput": "",
-      "isBaseOs": "False",
-      "description": "",
-      "name": "dnos_13.3.2.24",
-      "originalFileName": "dnos_13.3.2.24.tar",
-      "imageType": "dnos_image"
-    },
-     {
-      "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v13_3_2/dnos_13.3.2.27.tar",
-      "fileInput": "",
-      "isBaseOs": "False",
-      "description": "",
-      "name": "dnos_13.3.2.27",
-      "originalFileName": "dnos_13.3.2.27.tar",
-      "imageType": "dnos_image"
     }
+
   ]
 }

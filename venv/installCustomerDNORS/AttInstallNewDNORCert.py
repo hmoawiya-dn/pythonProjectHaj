@@ -7,9 +7,11 @@ from Models.Config import Config
 from Models.RestAPIUtil import *
 from datetime import datetime, timedelta
 from Models.postgresUtil import postgresUtil
+import yaml
 
 versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.21-7e91326bd6.tar'
-config = Config(dnor='dn0607')
+config = Config(dnor='dn4336')
+dnorVersion = "V14"
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR, config)
@@ -104,85 +106,112 @@ def test18_Installing_The_Primary_DNOR():
 def test19_Validate_all_services_are_UP_PrimaryDNOR():
     assert Functions.waitingforservices(config.primaryDNOR,config)
 
-def test20_getting_authorizationToken():
+@pytest.mark.addinputs
+def test20_load_yamls_files():
+    global apiurls
+    with open(f'API_URLS/{dnorVersion}/API_urls.yaml') as file:
+        apiurls = yaml.load(file,Loader=yaml.FullLoader)
+    assert (apiurls)
+
+@pytest.mark.addinputs
+def test21_getting_authorizationToken():
     global authorizationToken
     print('getting authorizationToken')
-    jsonfile = open('Requests/loginRequestBody.json')
+    jsonfile = open(f'Requests/{dnorVersion}/loginRequestBody.json')
     loginrequest = json.load(jsonfile)
     print(f"login request = {loginrequest}")
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/login'
+    url = f'https://{config.primaryDNOR}{apiurls.get("login_request_url")}'
     response = RestAPIUtil.postAPIrequest(url, loginrequest)
     assert (response['success'] == True)
     authorizationToken = response['token']
     assert (authorizationToken)
 
-def test21_add_users_to_DNOR():
+@pytest.mark.addinputs
+def test22_add_users_to_DNOR():
     global authorizationToken
     print(f'authorizationToken={authorizationToken}')
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/users/dnorUser'
-    users = open('inputs/users/NCEusers.json')
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_users_url")}'
+    users = open(f'inputs/users/{dnorVersion}/users.json')
     data = json.load(users)
     for user in data['dnorusers']:
         print(f'request = {user}')
-        response = RestAPIUtil.postAPIrequest(url, user,authorizationToken)
+        response = RestAPIUtil.postAPIrequest(url, user, authorizationToken)
         assert (response['success'] == True)
+        time.sleep(5)
 
-def test22_add_images_to_DNOR():
+@pytest.mark.addinputs
+def test23_add_images_to_DNOR():
     global authorizationToken
-    images = open('venv/installCustomerDNORS/CustomerFiles/ATTCert/images/images.json')
+    images = open(f'venv/installCustomerDNORS/CustomerFiles/ATTCert/images/images.json')
     data = json.load(images)
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/image-management'
+    dowmloadrequest = open('inputs/images/imagesDownload.json')
+    dowloadjson = json.load(dowmloadrequest)
+    url = f'https://{config.primaryDNOR}.dev.drivenets.net{apiurls.get("add_images_url")}'
+    if apiurls.get("download-image"):
+        downloadurl = f'https://{config.primaryDNOR}.dev.drivenets.net{apiurls.get("download-image")}'
     for image in data['dnos_images']:
-        print(f'request = {image}')
-        RestAPIUtil.postAPIrequest(url, image, authorizationToken)
+        try:
+            response = RestAPIUtil.postAPIrequest(url, image, authorizationToken)
+            time.sleep(5)
+            if apiurls.get("download-image"):
+                dowloadjson['id'] = response["id"]
+                RestAPIUtil.postAPIrequest(downloadurl, dowloadjson, authorizationToken)
+        except:
+            continue
 
-def test23_add_sites_to_DNOR():
+@pytest.mark.addinputs
+def test24_add_sites_to_DNOR():
     global authorizationToken
-    sites = open('inputs/sites/SiteGroups.json')
+    sites = open(f'inputs/sites/{dnorVersion}/sites.json')
     data = json.load(sites)
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/sites'
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_sites_url")}'
     for site in data['sites']:
         print(f'request = {site}')
-        RestAPIUtil.postAPIrequest(url, site, authorizationToken)
+        response = RestAPIUtil.postAPIrequest(url, site, authorizationToken)
+        time.sleep(5)
 
-def test24_add_Tacacs_servers_to_DNOR():
+@pytest.mark.addinputs
+def test25_add_Tacacs_servers_to_DNOR():
     TacacsQuery = "select id from aaa.aaa_types_db_models where type='Tacacs'"
     response1 = postgresUtil.execQueryPS(TacacsQuery,config.primaryDNOR)
     tacacsServiceID = response1[0][0]
-    print(f"Service id for type Tacacs = {tacacsServiceID}")
     global authorizationToken
-    tacacs = open('inputs/tacacs/tacacs.json')
+    tacacs = open(f'inputs/tacacs/{dnorVersion}/tacacs.json')
     data = json.load(tacacs)
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/aaa/aaaConfiguration'
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_tacacs_url")}'
     for tacacs in data['tacacs']:
-        tacacs['serviceId'] = tacacsServiceID
         print(f'request = {tacacs}')
-        RestAPIUtil.postAPIrequest(url, tacacs, authorizationToken)
+        tacacs['serviceId'] = tacacsServiceID
+        response = RestAPIUtil.postAPIrequest(url, tacacs, authorizationToken)
+        time.sleep(5)
 
-def test25_add_Radius_servers_to_DNOR():
+@pytest.mark.addinputs
+def test26_add_Radius_servers_to_DNOR():
     TacacsQuery = "select id from aaa.aaa_types_db_models where type='Radius'"
     response1 = postgresUtil.execQueryPS(TacacsQuery,config.primaryDNOR)
     radiusServiceID = response1[0][0]
-    print(f"Service id for type Radius = {radiusServiceID}")
     global authorizationToken
-    radius = open('inputs/radius/radius.json')
+    radius = open(f'inputs/radius/{dnorVersion}/radius.json')
     data = json.load(radius)
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/aaa/aaaConfiguration'
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_radius_url")}'
     for radius in data['radius']:
-        radius['serviceId'] = radiusServiceID
         print(f'request = {radius}')
-        RestAPIUtil.postAPIrequest(url, radius, authorizationToken)
+        radius['serviceId'] = radiusServiceID
+        response = RestAPIUtil.postAPIrequest(url, radius, authorizationToken)
+        time.sleep(5)
 
-def test26_add_Syslog_servers_to_DNOR():
+@pytest.mark.addinputs
+def test27_add_Syslog_servers_to_DNOR():
     global authorizationToken
-    syslogs = open('inputs/syslogs/syslogs.json')
+    syslogs = open(f'inputs/syslogs/{dnorVersion}/syslogs.json')
     data = json.load(syslogs)
-    url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/syslog/settings'
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_syslog_servers_url")}'
     for syslogs in data['syslogs']:
         print(f'request = {syslogs}')
-        RestAPIUtil.postAPIrequest(url, syslogs, authorizationToken)
+        response = RestAPIUtil.postAPIrequest(url, syslogs, authorizationToken)
+        time.sleep(5)
 
-def test27_Change_Yang_Version_Control_Date():
+def test28_Change_Yang_Version_Control_Date():
     query = 'select "createdAt" from yangs_version_control.yangs_version_control_db_models LIMIT 1'
     response = postgresUtil.execQueryPS(query, config.primaryDNOR)
     dateMinus = response[0][0] + timedelta(days=-14)
@@ -194,7 +223,7 @@ def test27_Change_Yang_Version_Control_Date():
     postgresUtil.updateTable(queryupdateUpdateddAt, config.primaryDNOR)
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
-def test28_Generating_DNORcfg_File_for_Secondary_DNOR():
+def test29_Generating_DNORcfg_File_for_Secondary_DNOR():
     global secondaryDNORIP
     secondaryDNORIP = Functions.getDNORIP(config.secondaryDNOR, config)
     cfgfile = configparser.RawConfigParser()
@@ -209,7 +238,7 @@ def test28_Generating_DNORcfg_File_for_Secondary_DNOR():
     Functions.postFileonDNOR(config.secondaryDNOR, config, content)
 
 @pytest.mark.skipif((config.tertiaryDNOR=='na') or (not config.tertiaryDNOR), reason="need to have tertiary dnor configured on dnor.proprerties file")
-def test29_Generating_dnorcfg_file_for_tertiary_DNOR():
+def test30_Generating_dnorcfg_file_for_tertiary_DNOR():
         tertiaryDNORIP = Functions.getDNORIP(config.tertiaryDNOR,config)
         cfgfile = configparser.RawConfigParser()
         cfgfile.read('venv/installCustomerDNORS/CustomerFiles/ATTCert/dnor.cfg')
@@ -225,7 +254,7 @@ def test29_Generating_dnorcfg_file_for_tertiary_DNOR():
         Functions.postFileonDNOR(config.tertiaryDNOR, config, content)
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
-def test30_Installing_The_Secondary_DNOR():
+def test31_Installing_The_Secondary_DNOR():
     cmd1= "cd deploy;sudo ./uninstall"
     cmd2= "cd deploy;sudo ./install"
     response1 = RemoteUtil.execSSHCommands(cmd1, config.user, config.password,config.secondaryDNOR,config)
@@ -239,11 +268,11 @@ def test30_Installing_The_Secondary_DNOR():
     assert ('Deployment has been completed successfully' in response2)
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
-def test31_Validate_all_services_are_UP_SecondaryDNOR():
+def test32_Validate_all_services_are_UP_SecondaryDNOR():
     assert Functions.waitingforservices(config.secondaryDNOR,config)
 
 @pytest.mark.skipif((config.tertiaryDNOR=='na') or (not config.tertiaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
-def test32_Installing_The_Tertiary_DNOR():
+def test33_Installing_The_Tertiary_DNOR():
     cmd1= "cd deploy;sudo ./uninstall"
     cmd2= "cd deploy;sudo ./install"
     response1 = RemoteUtil.execSSHCommands(cmd1, config.user, config.password,config.tertiaryDNOR,config)
@@ -256,7 +285,7 @@ def test32_Installing_The_Tertiary_DNOR():
     assert ('failed' not in response2)
     assert ('Deployment has been completed successfully' in response2)
 
-def test33_Enable_browser_certification_for_Primary_DNOR():
+def test34_Enable_browser_certification_for_Primary_DNOR():
     cmd0= "wget http://minioio.dev.drivenets.net:9000/devops/letsencrypt/*.dev.drivenets.net/fullchain.pem -O dev.drivenets.net.crt"
     cmd1= "wget http://minioio.dev.drivenets.net:9000/devops/letsencrypt/*.dev.drivenets.net/privkey.pem -O dev.drivenets.net.key"
 
@@ -267,7 +296,7 @@ def test33_Enable_browser_certification_for_Primary_DNOR():
     assert (('100%' and 'dev.drivenets.net.crt' and 'saved') in response1)
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
-def test34_Enable_browser_certification_for_Secondary_DNOR():
+def test35_Enable_browser_certification_for_Secondary_DNOR():
     cmd0= "wget http://minioio.dev.drivenets.net:9000/devops/letsencrypt/*.dev.drivenets.net/fullchain.pem -O dev.drivenets.net.crt"
     cmd1= "wget http://minioio.dev.drivenets.net:9000/devops/letsencrypt/*.dev.drivenets.net/privkey.pem -O dev.drivenets.net.key"
     response0 = RemoteUtil.execSSHCommands(cmd0, config.user, config.password, config.secondaryDNOR, config)
@@ -276,7 +305,7 @@ def test34_Enable_browser_certification_for_Secondary_DNOR():
     assert (('100%' and 'dev.drivenets.net.crt' and 'saved') in response1)
 
 @pytest.mark.skipif((config.tertiaryDNOR=='na') or (not config.tertiaryDNOR), reason="need to have tertiary dnor configured on dnor.proprerties file")
-def test35_Enable_browser_certification_for_Tertiary_DNOR():
+def test36_Enable_browser_certification_for_Tertiary_DNOR():
     cmd0= "wget http://minioio.dev.drivenets.net:9000/devops/letsencrypt/*.dev.drivenets.net/fullchain.pem -O dev.drivenets.net.crt"
     cmd1= "wget http://minioio.dev.drivenets.net:9000/devops/letsencrypt/*.dev.drivenets.net/privkey.pem -O dev.drivenets.net.key"
     response0 = RemoteUtil.execSSHCommands(cmd0, config.user, config.password, config.tertiaryDNOR, config)
@@ -284,7 +313,7 @@ def test35_Enable_browser_certification_for_Tertiary_DNOR():
     assert (('100%' and 'dev.drivenets.net.crt' and 'saved') in response0)
     assert (('100%' and 'dev.drivenets.net.crt' and 'saved') in response1)
 
-def test36_Enable_NGINX_for_Primary_DNOR():
+def test37_Enable_NGINX_for_Primary_DNOR():
         contaonerName = Functions.getNGINXcontainerName(config,config.primaryDNOR)
         lineDelete1 = "10.0.0.0"
         lineDelete2 = "deny"
@@ -300,7 +329,7 @@ def test36_Enable_NGINX_for_Primary_DNOR():
         assert ('signal process started'in response3)
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
-def test37_Enable_NGINX_for_Secondary_DNOR():
+def test38_Enable_NGINX_for_Secondary_DNOR():
     contaonerName = Functions.getNGINXcontainerName(config, config.secondaryDNOR)
     lineDelete1 = "10.0.0.0"
     lineDelete2 = "deny"
