@@ -12,8 +12,9 @@ import yaml
 
 versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-eng-15.0.1/dnor_eng.15.1.0.2-8940c7856a.tar'
 dnorVersion = "V15"
-config = Config(dnor='dn36')
+config = Config(dnor='dn48')
 
+@pytest.mark.timeout(300)
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
 

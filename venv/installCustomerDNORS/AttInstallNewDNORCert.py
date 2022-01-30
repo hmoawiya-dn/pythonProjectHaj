@@ -9,8 +9,8 @@ from datetime import datetime, timedelta
 from Models.postgresUtil import postgresUtil
 import yaml
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.21-7e91326bd6.tar'
-config = Config(dnor='dn4336')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.24-d5c8652fbd.tar'
+config = Config(dnor='dn433649')
 dnorVersion = "V14"
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
