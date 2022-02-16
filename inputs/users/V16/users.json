@@ -57,7 +57,7 @@
       "password": "password123!",
       "role":"Operator",
       "userType": "DNOR",
-      "username": "HajOperatorUserEmpty"
+      "username": "OperatorUserEmpty"
     }
   ]
 }

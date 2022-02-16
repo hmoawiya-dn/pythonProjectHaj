@@ -15,7 +15,7 @@ class RemoteUtil:
             ssh.connect(server, port, user, password)
         except Exception as e:
             print(f"Failed to connect to {server} Error = {e}")
-            if 'Unable to connect' in str(e):
+            if 'unable to connect' or 'error' or 'failed' in str(e).lower():
                 try:
                     print(f"Failed to connect trying with port {config.ConnectionPort}")
                     ssh.connect(server, config.ConnectionPort, user, password)

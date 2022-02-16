@@ -19,3 +19,4 @@ def test_2():
 @pytest.mark.dependency(depends=['test_2'],reason= 'Hello')
 def test_3():
     assert 1==1
+

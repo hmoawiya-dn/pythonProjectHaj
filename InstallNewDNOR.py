@@ -10,10 +10,10 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-15.1.0/dnor_release.15.1.0.1-844c9edc50.tar'
-dnorVersion = "V15"
-gdnor = True
-config = Config(dnor='dn433649')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-14.2.1/dnor_dev.14.2.1.8-e1e510b2d0.tar'
+dnorVersion = "V16"
+gdnor = False
+config = Config(dnor='dn36')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
@@ -246,6 +246,7 @@ def test35_add_users_to_DNOR():
         print(f'request = {user}')
         response = RestAPIUtil.postAPIrequest(url, user,authorizationToken)
         assert (response['success'] == True)
+        time.sleep(5)
 
 @pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
@@ -266,6 +267,7 @@ def test36_add_images_to_DNOR():
                 RestAPIUtil.postAPIrequest(downloadurl, dowloadjson, authorizationToken)
         except:
             continue
+        time.sleep(5)
 
 @pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
@@ -277,6 +279,7 @@ def test37_add_sites_to_DNOR():
     for site in data['sites']:
         print(f'request = {site}')
         response = RestAPIUtil.postAPIrequest(url, site, authorizationToken)
+        time.sleep(5)
 
 @pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
@@ -292,6 +295,7 @@ def test38_add_Tacacs_servers_to_DNOR():
         print(f'request = {tacacs}')
         tacacs['serviceId'] = tacacsServiceID
         response = RestAPIUtil.postAPIrequest(url, tacacs, authorizationToken)
+        time.sleep(5)
 
 @pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
@@ -307,6 +311,7 @@ def test39_add_Radius_servers_to_DNOR():
         print(f'request = {radius}')
         radius['serviceId'] = radiusServiceID
         response = RestAPIUtil.postAPIrequest(url, radius, authorizationToken)
+        time.sleep(5)
 
 @pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
@@ -318,3 +323,4 @@ def test40_add_Syslog_servers_to_DNOR():
     for syslogs in data['syslogs']:
         print(f'request = {syslogs}')
         response = RestAPIUtil.postAPIrequest(url, syslogs, authorizationToken)
+        time.sleep(5)
