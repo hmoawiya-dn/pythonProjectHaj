@@ -10,10 +10,10 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-14.2.1/dnor_dev.14.2.1.8-e1e510b2d0.tar'
+versionLink = 'https://jenkins2.dev.drivenets.net/job/comet/job/dnor_eng_16.0.0/4/'
 dnorVersion = "V16"
 gdnor = False
-config = Config(dnor='dn36')
+config = Config(dnor='dn0607')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
@@ -323,4 +323,16 @@ def test40_add_Syslog_servers_to_DNOR():
     for syslogs in data['syslogs']:
         print(f'request = {syslogs}')
         response = RestAPIUtil.postAPIrequest(url, syslogs, authorizationToken)
+        time.sleep(5)
+
+@pytest.mark.addinputs
+@pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
+def test41_add_NCE_users_group_to_DNOR():
+    global authorizationToken
+    ncegroup = open(f'inputs/NCEusers/{dnorVersion}/NCEusers.json')
+    data = json.load(ncegroup)
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_nce_user_group")}'
+    for group in data['ncegroups']:
+        print(f'request = {group}')
+        response = RestAPIUtil.postAPIrequest(url, group, authorizationToken)
         time.sleep(5)
