@@ -10,10 +10,10 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 
-versionLink = 'https://jenkins2.dev.drivenets.net/job/comet/job/dnor_eng_16.0.0/4/'
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-eden-adjust-ecomp-api-to-gi/dnor_private.16.0.0.8-a2ad071072.tar'
 dnorVersion = "V16"
 gdnor = False
-config = Config(dnor='dn0607')
+config = Config(dnor='dn36')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
@@ -273,6 +273,8 @@ def test36_add_images_to_DNOR():
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test37_add_sites_to_DNOR():
     global authorizationToken
+    print("getting group id")
+    cmd = "select id from nce_management.site_groups where companyName = 'DRIVENETS'"
     sites = open(f'inputs/sites/{dnorVersion}/sites.json')
     data = json.load(sites)
     url = f'https://{config.primaryDNOR}{apiurls.get("add_sites_url")}'
