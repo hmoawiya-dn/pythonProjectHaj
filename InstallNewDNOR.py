@@ -10,10 +10,11 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-eden-adjust-ecomp-api-to-gi/dnor_private.16.0.0.8-a2ad071072.tar'
+
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-eng-16.0.0/dnor_eng.16.0.0.3-2736600d32.tar'
 dnorVersion = "V16"
-gdnor = False
-config = Config(dnor='dn36')
+gdnor = True
+config = Config(dnor='dn48')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
