@@ -6,4 +6,5 @@ add_sites_url : "/api/sites"
 add_tacacs_url : "/api/aaa/aaaConfiguration"
 add_radius_url : "/api/aaa/aaaConfiguration"
 add_syslog_servers_url : "/api/syslog/settings"
-add_site_groups_url : "/api/nce-group/create-group"
+add_site_groups_url :
+add_nce_user_group : "/api/nce-group/create-group"

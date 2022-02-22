@@ -11,10 +11,10 @@ import yaml
 
 
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-flpopescu-dnor-14.2.1-ws-13444/dnor_private.14.2.1.2-01dea958a8.tar'
-dnorVersion = "V14"
-gdnor = False
-config = Config(dnor='dnh200201')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-eng-16.0.0/dnor_eng.16.0.0.3-2736600d32.tar'
+dnorVersion = "V16"
+gdnor = True
+config = Config(dnor='dn40')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
