@@ -1,58 +1,33 @@
-{ "dnorusers": [
+{ "ncegroups":
+  [
     {
-      "confirmPassword": "password123!",
-      "dnorUserType": "ADMIN",
-      "firstName":"Moawiya",
-      "lastName":"Haj-Yahia",
-      "organizationId": "8b75162d-e6ac-41c3-a3de-2105c06823a7",
-      "password": "password123!",
-      "role":"Viewer",
-      "userType": "DNOR",
-      "username": "HajViewer"
+      "name": "NewNCEUsersGroup",
+      "users":
+      [
+        {
+          "username": "dnroot",
+          "password": "dnroot",
+          "authType": "localUser"
+        },
+        {
+          "username": "iadmin",
+          "password": "iadmin",
+          "authType": "tripleA"
+        }
+      ],
+      "readOnly": false
     },
     {
-      "confirmPassword": "password123!",
-      "dnorUserType": "ADMIN",
-      "firstName":"Moawiya",
-      "lastName":"Haj-Yahia",
-      "organizationId": "8b75162d-e6ac-41c3-a3de-2105c06823a7",
-      "password": "password123!",
-      "role":"Admin",
-      "userType": "DNOR",
-      "username": "HajAdmin"
-    },
-    {
-      "confirmPassword": "password123!",
-      "dnorUserType": "ADMIN",
-      "firstName":"Moawiya",
-      "lastName":"Haj-Yahia",
-      "organizationId": "8b75162d-e6ac-41c3-a3de-2105c06823a7",
-      "password": "password123!",
-      "role":"SuperAdmin",
-      "userType": "DNOR",
-      "username": "HajSuperAdmin"
-    },
-    {
-      "confirmPassword": "password123!",
-      "dnorUserType": "ADMIN",
-      "firstName":"Moawiya",
-      "lastName":"Haj-Yahia",
-      "organizationId": "8b75162d-e6ac-41c3-a3de-2105c06823a7",
-      "password": "password123!",
-      "role":"Operator",
-      "userType": "DNOR",
-      "username": "HajOperator"
-    },
-    {
-      "confirmPassword": "password123!",
-      "dnorUserType": "ADMIN",
-      "firstName":"",
-      "lastName":"",
-      "organizationId": "8b75162d-e6ac-41c3-a3de-2105c06823a7",
-      "password": "password123!",
-      "role":"Operator",
-      "userType": "DNOR",
-      "username": "HajOperatorEmpty"
+      "name": "NewNCELocalUser",
+      "users":
+      [
+        {
+          "username": "dnroot",
+          "password": "dnroot",
+          "authType": "localUser"
+        }
+      ],
+  "readOnly": false
     }
   ]
 }

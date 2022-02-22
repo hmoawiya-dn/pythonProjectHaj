@@ -3,8 +3,8 @@ from Models import Functions, DNORFunctions
 from Models.RemoteUtil import *
 from Models.Config import Config
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-16.0.0/dnor_dev.16.0.0.24-b793512c7b.tar'
-config = Config(dnor='dn40')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-eng-16.0.0/dnor_eng.16.0.0.3-2736600d32.tar'
+config = Config(dnor='dn063607')
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason=f"need to have scondary dnor configured on dnor.proprerties file")
 def test01_Validate_Secondary_DNOR_is_in_Cold():
