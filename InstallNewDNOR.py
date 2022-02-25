@@ -9,12 +9,10 @@ from Models.RestAPIUtil import *
 from Models.postgresUtil import postgresUtil
 import yaml
 
-
-
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-eng-16.0.0/dnor_eng.16.0.0.3-2736600d32.tar'
-dnorVersion = "V16"
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.1/dnor_release.14.2.1.2-3db1697ed3.tar'
+dnorVersion = "V15"
 gdnor = True
-config = Config(dnor='dn40')
+config = Config(dnor='dn060749')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
