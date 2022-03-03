@@ -2,7 +2,7 @@
   "dnos_images": [
     {
       "fileName": "",
-      "url": " , ",
+      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v15_2_1/dnos_15.2.1.5.tar",
       "fileInput": "",
       "isBaseOs": "False",
       "description": "DNOS Image",

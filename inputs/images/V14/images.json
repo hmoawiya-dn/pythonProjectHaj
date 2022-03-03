@@ -13,44 +13,11 @@
     },
     {
       "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v16/dnos_16.0.0.2.tar",
-      "description": "",
-      "fileInput": null,
-      "name": "dnos_16.0.0.2",
-      "originalFileName": "dnos_16.0.0.2.tar",
-      "imageType": "dnos_image",
-      "siSupported": false,
-      "username": "superadmin"
-    },
-    {
-      "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/rel_v16/dnos_16.0.0.3.tar",
-      "description": "",
-      "fileInput": null,
-      "name": "dnos_16.0.0.3",
-      "originalFileName": "dnos_16.0.0.3.tar",
-      "imageType": "dnos_image",
-      "siSupported": false,
-      "username": "superadmin"
-    },
-    {
-      "fileName": "",
       "url": "http://minioio.dev.drivenets.net:9000/prereq-pkgs/prereq_dnos_15.0.1.1.tar",
       "description": "",
       "fileInput": null,
       "name": "prereq_dnos_15.0.1.1",
       "originalFileName": "prereq_dnos_15.0.1.1.tar",
-      "siSupported": false,
-      "username": "superadmin",
-      "imageType": "dnos_prerequisite"
-    },
-    {
-      "fileName": "",
-      "url": "http://minioio.dev.drivenets.net:9000/prereq-pkgs/prereq_dnos_16.0.0.7.tar",
-      "description": "",
-      "fileInput": null,
-      "name": "prereq_dnos_16.0.0.7",
-      "originalFileName": "prereq_dnos_16.0.0.7.tar",
       "siSupported": false,
       "username": "superadmin",
       "imageType": "dnos_prerequisite"

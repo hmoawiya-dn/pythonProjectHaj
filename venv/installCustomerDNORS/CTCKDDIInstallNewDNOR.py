@@ -12,7 +12,7 @@ import yaml
 # CTC KDDI have 2 nodes of dnor - primary and secondary
 versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.0/dnor_release.14.2.0.5-6e872b3468.tar'
 dnorVersion = "V14"
-config = Config(dnor='dn0607')
+config = Config(dnor='dn49')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
