@@ -1,0 +1,13 @@
+{ "bulks":
+  [
+    {
+      "numOfClusters": "10",
+      "clusterType": "SA-40C",
+      "basePort": "50000",
+      "isConductorMode": false,
+      "hostRemoteDeploy": "",
+      "needDeploy": true,
+      "isTestMode": false
+    }
+  ]
+}

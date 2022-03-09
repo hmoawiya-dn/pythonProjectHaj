@@ -10,7 +10,8 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 # CTC KDDI have 2 nodes of dnor - primary and secondary
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.0/dnor_release.14.2.0.5-6e872b3468.tar'
+#versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.0/dnor_release.14.2.0.5-6e872b3468.tar'
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.1/dnor_release.14.2.1.4-bb07716adc.tar'
 dnorVersion = "V14"
 config = Config(dnor='dn49')
 

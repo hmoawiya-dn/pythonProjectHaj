@@ -244,7 +244,7 @@ def test31_add_users_to_DNOR():
     global authorizationToken
     print(f'authorizationToken={authorizationToken}')
     url = f'https://{config.primaryDNOR}.dev.drivenets.net/api/users/dnorUser'
-    users = open('inputs/users/NCEusers.json')
+    users = open('inputs/users/BulkClusters.json')
     data = json.load(users)
     for user in data['dnorusers']:
         print(f'request = {user}')
