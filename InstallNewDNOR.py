@@ -9,7 +9,7 @@ from Models.RestAPIUtil import *
 from Models.postgresUtil import postgresUtil
 import yaml
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-16.0.0/dnor_dev.16.0.0.48-d3883d1583.tar'
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-16.0.0/dnor_dev.16.0.0.57-c477ac7acc.tar'
 dnorVersion = "V16"
 gdnor = False
 config = Config(dnor='dn0643')
