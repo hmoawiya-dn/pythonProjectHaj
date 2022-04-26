@@ -1,26 +1,14 @@
 { "sites": [
     {
-      "address": "City: new york | State: New York",
-      "city": "City: new york | State: New York",
+      "address": "Taibee",
+      "city": "Taibee",
       "groupId": "",
       "id": null,
-      "lat": "40.71",
-      "lng":"-74.01",
-      "name": "New York",
-      "region":"New York",
-      "state":"New York",
-      "zip": "404000"
-    },
-    {
-      "address": "Taybee",
-      "city": "Taybee",
-      "groupId": "",
-      "id": null,
-      "lat": "40.71",
-      "lng":"-74.01",
-      "name": "Taybee",
+      "lat": "1",
+      "lng":"1",
+      "name": "NewSiteTest",
       "region":"Merkaz",
-      "state":"Taybee",
+      "state":"Israel",
       "zip": "404000"
     }
   ]

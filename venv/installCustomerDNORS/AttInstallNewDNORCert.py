@@ -10,7 +10,7 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.25-e874db7b47.tar'
-config = Config(dnor='dn6949')
+config = Config(dnor='dn36')
 dnorVersion = "V14"
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
@@ -94,7 +94,7 @@ def test18_Installing_The_Primary_DNOR():
     cmd1= "cd deploy;sudo ./uninstall"
     cmd2= "cd deploy;sudo ./install"
     response1 = RemoteUtil.execSSHCommands(cmd1, config.user, config.password,config.primaryDNOR,config)
-    response2 = RemoteUtil.execSSHCommands(cmd2, config.user, config.password,config.primaryDNOR,config)
+    response2 = RemoteUtil.execSSHCommandsNew(cmd2, config.user, config.password,config.primaryDNOR,config)
     assert ('error' not in response1)
     assert ('exception' not in response1)
     assert ('failed' not in response1)

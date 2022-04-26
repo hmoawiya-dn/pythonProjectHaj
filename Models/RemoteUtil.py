@@ -95,8 +95,32 @@ class RemoteUtil:
         sftp.close()
         ssh.close()
 
-    def execSSHCommandsSubprocess(commandLine, user, password, server, config, port="22"):
-        ssh = subprocess.Popen(["ssh", "-i " + password, user + '@' + server + ':' + port, commandLine],
-                               shell=True,
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.PIPE)
+    def execSSHCommandsNew(commandLine, user, password, server, config, port="2222"):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        print(f"Executing on {user}@${server} command: " + commandLine)
+
+        try:
+            ssh.connect(server, port, user, password)
+        except Exception as e:
+            print(f"Failed to connect to {server} Error = {e}")
+            if 'unable to connect' or 'error' or 'failed' in str(e).lower():
+                try:
+                    print(f"Failed to connect trying with port {config.ConnectionPort}")
+                    ssh.connect(server, config.ConnectionPort, user, password)
+                except Exception as e:
+                    print(f"Failed to connect to {server} Error = {e}")
+                    return "Connection to the server failed"
+
+        stdin, stdout, stderr = ssh.exec_command(commandLine, get_pty=True)
+
+        def line_buffered(f):
+            line_buf = ""
+            while not f.channel.exit_status_ready():
+                line_buf += f.read(1024).decode('utf-8', 'ignore')
+                if line_buf.endswith('\n'):
+                    yield line_buf
+                    line_buf = ''
+
+        for l in line_buffered(stdout):
+            print(l)

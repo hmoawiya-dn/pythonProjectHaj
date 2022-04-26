@@ -1,22 +1,22 @@
-import pytest
+import time
+import logging
+import sys
 
-from Models.Config import Config
-from Models.TestConfig import TestConfig
-
-haj='moawiya'
-#config = Config(dnor='dn0607')
-
-@pytest.mark.dependency()
-def test_1():
-    assert (1==1)
+console_handler = logging.StreamHandler(stream=sys.stdout)
+console_handler.setLevel(logging.DEBUG)
+logging.basicConfig(handlers=[console_handler])
 
 
-@pytest.mark.dependency(depends=['test_1'])
-@pytest.mark.skipif((haj=='moawiya'),reason='not here')
-def test_2():
-    assert (1==0)
+  # can be logging.DEBUG or logging.INFO as well
 
-@pytest.mark.dependency(depends=['test_2'],reason= 'Hello')
-def test_3():
-    assert 1==1
+logger = logging.getLogger(__name__)
+logger.addHandler(console_handler)
+logger.setLevel(logging.DEBUG)
+#formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+def test_haj():
+
+    for i in range(10):
+        logger.info('-----------------')
+        time.sleep(2)
 

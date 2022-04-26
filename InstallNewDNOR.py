@@ -1,4 +1,6 @@
 import configparser
+import json
+
 import pytest
 import time
 from Models import Functions
@@ -9,10 +11,10 @@ from Models.RestAPIUtil import *
 from Models.postgresUtil import postgresUtil
 import yaml
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-16.0.0/dnor_release.16.0.0.5-c4dcac00ce.tar'
-dnorVersion = "V16"
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.1/dnor_release.14.2.1.4-bb07716adc.tar'
+dnorVersion = "V14"
 gdnor = False
-config = Config(dnor='dn694349')
+config = Config(dnor='dn36')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
@@ -272,13 +274,18 @@ def test36_add_images_to_DNOR():
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test37_add_sites_to_DNOR():
     global authorizationToken
-    print("getting group id")
-    cmd = "select id from nce_management.site_groups where companyName = 'DRIVENETS'"
     sites = open(f'inputs/sites/{dnorVersion}/sites.json')
     data = json.load(sites)
     url = f'https://{config.primaryDNOR}{apiurls.get("add_sites_url")}'
+    if (apiurls.get("site_group")):
+        print("getting group id")
+        cmd = "select id from nce_management.site_groups where "+ '"companyName" = '+ "'DRIVENETS'"
+        response = postgresUtil.execQueryPS(cmd, config.primaryDNOR)
+        groupID = response[0][0]
     for site in data['sites']:
         print(f'request = {site}')
+        if (apiurls.get("site_group")):
+            site['groupId'] = groupID
         response = RestAPIUtil.postAPIrequest(url, site, authorizationToken)
         time.sleep(5)
 

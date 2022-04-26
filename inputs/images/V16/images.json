@@ -6,13 +6,13 @@
       "urls":
       [
         {
-          "fileName": "drivenets_baseos_2.4890000007.tar",
-          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_baseos_2.4890000007.tar"
+          "fileName": "bundle_16.2.0.21.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/bundle_16.2.0.21.tar"
         }
       ],
       "newStack": {
-      "stackName": "BaseOS2.489",
-      "stackDescription": "BaseOS Stack Only"
+      "stackName": "V16.2",
+      "stackDescription": "v16.2.0.21 full bundle"
       }
     },
     {
