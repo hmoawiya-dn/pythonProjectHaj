@@ -117,7 +117,7 @@ def validate_prerequisites_VMs_are_up_and_reachable(dnor,config):
 def validate_dnor_is_Cold_statu(dnor,config):
     cmd = f'sudo docker service ls | grep 1/1 | wc -l'
     response = RemoteUtil.execSSHCommands(cmd, config.user, config.password, dnor, config)
-    assert int(response) <= 9
+    assert int(response) <= 10
 
 def get_groupid_from_DNOR(dnor):
     query = 'select id from nce_management.nce_group_models'
