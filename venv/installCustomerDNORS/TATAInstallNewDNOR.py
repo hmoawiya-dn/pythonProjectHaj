@@ -11,8 +11,8 @@ import yaml
 
 
 versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-15.0.0/dnor_release.15.0.0.5-3365d7f103.tar'
-dnorVersion = "V15"
-config = Config(dnor='dn36')
+dnorVersion = "V16"
+config = Config(dnor='dn49')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)

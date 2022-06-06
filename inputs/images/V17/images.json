@@ -14,6 +14,20 @@
       "stackName": "V16.2",
       "stackDescription": "v16.2.0.21 full bundle"
       }
+    },
+    {
+      "packageMethodType": "url",
+      "urls":
+      [
+        {
+          "fileName": "drivenets_dnos_16.2.0.10_12.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_16.2.0.10_12.tar"
+        }
+      ],
+      "newStack": {
+      "stackName": "DNOS16.2",
+      "stackDescription": "DNOS Stack Only"
+      }
     }
   ]
 }

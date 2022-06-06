@@ -11,10 +11,10 @@ from Models.RestAPIUtil import *
 from Models.postgresUtil import postgresUtil
 import yaml
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-16.0.0/dnor_release.16.0.0.8-701757088a.tar'
-dnorVersion = "V16"
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.25-e874db7b47.tar'
+dnorVersion = "V14"
 gdnor = False
-config = Config(dnor='dn060736')
+config = Config(dnor='dn49')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
@@ -213,7 +213,8 @@ def test31_Enable_NGINX_for_Primary_DNOR():
 def test32_Enable_NGINX_for_Secondary_DNOR():
     DNORFunctions.enable_NGINX_for_DNOR(config.secondaryDNOR, config)
 
-@pytest.mark.addinputs
+
+@pytest.mark.addinputs1
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test33_load_yamls_files():
     global apiurls
@@ -221,7 +222,8 @@ def test33_load_yamls_files():
         apiurls = yaml.load(file,Loader=yaml.FullLoader)
     assert (apiurls)
 
-@pytest.mark.addinputs
+
+@pytest.mark.addinputs1
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test34_getting_authorizationToken():
     global authorizationToken
@@ -344,3 +346,32 @@ def test41_add_NCE_users_group_to_DNOR():
         print(f'request = {group}')
         response = RestAPIUtil.postAPIrequest(url, group, authorizationToken)
         time.sleep(5)
+
+
+@pytest.mark.addinputs1
+@pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
+def test42_generate_tech_supports_to_DNOR():
+    global authorizationToken
+    tss = open(f'inputs/techSupports/{dnorVersion}/techSupports.json')
+    data = json.load(tss)
+    url = f'https://{config.primaryDNOR}{apiurls.get("generate_dnor_techSupport")}'
+    for ts in data['dnortss']:
+        print(f'request Haj = {ts}')
+        response = RestAPIUtil.postAPIrequest(url, ts, authorizationToken)
+
+@pytest.mark.addinputs1
+@pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
+def test43_perform_DNOR_backup():
+    global authorizationToken
+    url = f'https://{config.primaryDNOR}{apiurls.get("dnor_back_up")}'
+    RestAPIUtil.postAPIrequest(url, "", authorizationToken)
+
+def test44_waiting_2_minutes_to_check_contianers_stability():
+    time.sleep(120)
+
+def test45_check_if_all_containers_are_stable_primary_DNOR():
+    DNORFunctions.check_containers_stability(config.primaryDNOR,config)
+
+@pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
+def test46_check_if_all_containers_are_stable_secondary_DNOR():
+    DNORFunctions.check_containers_stability(config.secondaryDNOR,config)

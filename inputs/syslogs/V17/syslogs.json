@@ -1,0 +1,49 @@
+{ "syslogs":
+[
+    {
+        "ip": "1.1.1.1",
+        "port": "100",
+        "severity": "debug"
+    },
+    {
+        "ip": "2.2.2.2",
+        "port": "200",
+        "severity": "error"
+    },
+    {
+        "ip": "3.3.3.3",
+        "port": "300",
+        "severity": "*"
+    },
+    {
+        "ip": "4.4.4.4",
+        "port": "400",
+        "severity": "warning"
+    },
+    {
+        "ip": "5.5.5.5",
+        "port": "500",
+        "severity": "notice"
+    },
+    {
+        "ip": "6.6.6.6",
+        "port": "600",
+        "severity": "alert"
+    },
+    {
+        "ip": "7.7.7.7",
+        "port": "700",
+        "severity": "emergency"
+    },
+    {
+        "ip": "8.8.8.8",
+        "port": "800",
+        "severity": "critical"
+    },
+    {
+        "ip": "9.9.9.9",
+        "port": "900",
+        "severity": "informational"
+    }
+]
+}

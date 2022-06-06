@@ -1,0 +1,13 @@
+{ "dnortss": [
+    {
+      "fileName": "DNORTechSupportAutomatedAll",
+      "includeAllDnorNodes": true,
+      "includeAllAppLogs": true,
+      "includeELKLogstash": true,
+      "includePrometheus": true,
+      "applicationLogs": "",
+      "includeDbSnapshot": true,
+      "includeRabbitMQ": true
+    }
+  ]
+}

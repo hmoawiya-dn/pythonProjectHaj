@@ -1,0 +1,13 @@
+{ "SiteGroups":
+[
+    {
+      "companyName": "NewSitesGroup1",
+      "groupType": "Automated"
+    },
+    {
+      "companyName": "NewSitesGroup2",
+      "groupType": "Automated"
+    }
+
+  ]
+}
