@@ -8,3 +8,6 @@ add_radius_url : "/api/aaa/aaaConfiguration"
 add_syslog_servers_url : "/api/syslog/settings"
 add_site_groups_url :
 add_nce_user_group : "/api/nce-group/create-group"
+generate_dnor_techSupport : "/api/performance/snapshots"
+dnor_back_up : "/api/backup-and-restore/take-backup-manually"
+back_up_configuration : "/api/backup-and-restore/update-settings/backupSettings"
