@@ -33,9 +33,12 @@ def deleteDNOR(dnor,config):
     #assert ('permission denied' not in response7)
 
 def check_containers_stability(dnor,config):
-    cmd = 'timeout 5 docker events --filter event=restart --since=2m'
-    response = RemoteUtil.execSSHCommands(cmd, config.user, config.password, dnor, config)
-    assert (response == 'There was no output for this command')
+    cmd1 = 'timeout 5 docker events --filter event=restart --since=5m'
+    cmd2 = 'timeout 5 docker events --filter event=destroy --since=5m'
+    response1 = RemoteUtil.execSSHCommands(cmd1, config.user, config.password, dnor, config)
+    response2 = RemoteUtil.execSSHCommands(cmd2, config.user, config.password, dnor, config)
+    assert (response1 == 'There was no output for this command')
+    assert (response2 == 'There was no output for this command')
 
 def delete_folders_from_DNOR(dnor,config):
     cmd1 = "sudo rm -r /data/*"

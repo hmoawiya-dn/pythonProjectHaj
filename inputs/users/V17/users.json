@@ -9,7 +9,7 @@
       "password": "password123!",
       "role":"Viewer",
       "userType": "DNOR",
-      "username": "ViewerUser"
+      "username": "ViewerUser2"
     },
     {
       "confirmPassword": "password123!",
@@ -21,7 +21,7 @@
       "password": "password123!",
       "role":"Admin",
       "userType": "DNOR",
-      "username": "AdminUser"
+      "username": "AdminUser2"
     },
     {
       "confirmPassword": "password123!",
@@ -33,7 +33,7 @@
       "password": "password123!",
       "role":"SuperAdmin",
       "userType": "DNOR",
-      "username": "SuperAdminUser"
+      "username": "SuperAdminUser2"
     },
     {
       "confirmPassword": "password123!",
@@ -45,7 +45,7 @@
       "password": "password123!",
       "role":"Operator",
       "userType": "DNOR",
-      "username": "OperatorUser"
+      "username": "OperatorUser2"
     },
     {
       "confirmPassword": "password123!",
@@ -57,7 +57,7 @@
       "password": "password123!",
       "role":"Operator",
       "userType": "DNOR",
-      "username": "OperatorUserEmpty"
+      "username": "OperatorUserEmpty2"
     }
   ]
 }

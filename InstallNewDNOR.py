@@ -11,10 +11,10 @@ from Models.RestAPIUtil import *
 from Models.postgresUtil import postgresUtil
 import yaml
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.25-e874db7b47.tar'
-dnorVersion = "V14"
-gdnor = False
-config = Config(dnor='dn49')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-17.0.0/dnor_release.17.0.0.4-fd1b2dc9bf.tar'
+dnorVersion = "V17"
+gdnor = True
+config = Config(dnor='dnh202rnd1')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
     DNORFunctions.validate_prerequisites_VMs_are_up_and_reachable(config.primaryDNOR,config)
@@ -237,7 +237,7 @@ def test34_getting_authorizationToken():
     authorizationToken = response['token']
     assert (authorizationToken)
 
-@pytest.mark.addinputs
+@pytest.mark.addinputs1
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test35_add_users_to_DNOR():
     global authorizationToken
@@ -348,7 +348,7 @@ def test41_add_NCE_users_group_to_DNOR():
         time.sleep(5)
 
 
-@pytest.mark.addinputs1
+@pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test42_generate_tech_supports_to_DNOR():
     global authorizationToken
@@ -359,15 +359,15 @@ def test42_generate_tech_supports_to_DNOR():
         print(f'request Haj = {ts}')
         response = RestAPIUtil.postAPIrequest(url, ts, authorizationToken)
 
-@pytest.mark.addinputs1
+@pytest.mark.addinputs
 @pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test43_perform_DNOR_backup():
     global authorizationToken
     url = f'https://{config.primaryDNOR}{apiurls.get("dnor_back_up")}'
     RestAPIUtil.postAPIrequest(url, "", authorizationToken)
 
-def test44_waiting_2_minutes_to_check_contianers_stability():
-    time.sleep(120)
+def test44_waiting_5_minutes_to_check_contianers_stability():
+    time.sleep(300)
 
 def test45_check_if_all_containers_are_stable_primary_DNOR():
     DNORFunctions.check_containers_stability(config.primaryDNOR,config)

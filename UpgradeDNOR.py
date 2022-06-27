@@ -1,10 +1,12 @@
+import time
+
 import pytest
 from Models import Functions, DNORFunctions
 from Models.RemoteUtil import *
 from Models.Config import Config
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-eng-17.0.0/dnor_eng.17.0.0.1-ea6758731a.tar'
-config = Config(dnor='dn0749')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-17.0.0/dnor_release.17.0.0.4-fd1b2dc9bf.tar'
+config = Config(dnor='dn02')
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason=f"need to have scondary dnor configured on dnor.proprerties file")
 def test01_Validate_Secondary_DNOR_is_in_Cold():
@@ -65,3 +67,9 @@ def test12_Enable_NGINX_for_Primary_DNOR():
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
 def test13_Enable_NGINX_for_Secondary_DNOR():
     DNORFunctions.enable_NGINX_for_DNOR(config.secondaryDNOR, config)
+
+def test14_waiting_5_minutes_to_check_contianers_stability():
+    time.sleep(300)
+
+def test15_check_if_all_containers_are_stable_primary_DNOR():
+    DNORFunctions.check_containers_stability(config.primaryDNOR,config)
