@@ -1,0 +1,9 @@
+{ "configs":
+  [
+          {
+            "timeoutInMinutes": 35
+          }
+  ]
+}
+
+

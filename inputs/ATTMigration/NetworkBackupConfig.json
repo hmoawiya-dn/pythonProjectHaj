@@ -1,0 +1,20 @@
+{ "configs": [
+         {
+            "autoBackup": true,
+            "backupSchedule": {
+                                  "timeFrame": "Weekly",
+                                  "day": "Sunday",
+                                  "hour": 22,
+                                  "minute": 0
+        },
+    "filesToKeepPerNce": 4,
+    "fileNameFormat": {
+        "firstCriteria": "NCE Name",
+        "secondCriteria": "Date",
+        "thirdCriteria": "Time",
+        "forthCriteria": "None"}
+      }
+  ]
+}
+
+

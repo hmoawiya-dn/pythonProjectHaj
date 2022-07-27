@@ -6,6 +6,7 @@ def checkIfVersionExist(config, dn, fullVersion):
     version = str(fullVersion).split("/")[-1]
     cmd =f"sudo ls | grep {version} | wc -l"
     response = RemoteUtil.execSSHCommands(cmd, config.user,config.password, dn, config)
+    print(f'response = {response}')
     if (response.strip()=="0"):
         print("Looks like that the Version isn't exist on the server ... Going to dowenload it...")
         cmd2 = f"sudo wget {fullVersion}"

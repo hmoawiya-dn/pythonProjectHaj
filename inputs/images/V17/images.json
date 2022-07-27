@@ -6,13 +6,13 @@
       "urls":
       [
         {
-          "fileName": "bundle_16.2.0.21.tar",
-          "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/bundle_16.2.0.21.tar"
+          "fileName": "bundle_17.0.0.23.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnos-rel/bundle_17.0.0.23.tar"
         }
       ],
       "newStack": {
-      "stackName": "V16.2",
-      "stackDescription": "v16.2.0.21 full bundle"
+      "stackName": "V17_full_bundle",
+      "stackDescription": "DNOS 17.0.0.23 full bundle"
       }
     },
     {
@@ -20,13 +20,21 @@
       "urls":
       [
         {
-          "fileName": "drivenets_dnos_16.2.0.10_12.tar",
-          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_16.2.0.10_12.tar"
+          "fileName": "drivenets_dnos_17.0.0.23_25.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_dnos_17.0.0.23_25.tar"
+        },
+        {
+          "fileName": "drivenets_gi_17.0.0.23_25.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_gi_17.0.0.23_25.tar"
+        },
+        {
+          "fileName": "drivenets_baseos_2.3920000014.tar",
+          "url": "http://minioio.dev.drivenets.net:9000/dnpkg-60d/drivenets_baseos_2.3920000014.tar"
         }
       ],
       "newStack": {
-      "stackName": "DNOS16.2",
-      "stackDescription": "DNOS Stack Only"
+      "stackName": "V17",
+      "stackDescription": "DNOS v17.0.0.23"
       }
     }
   ]

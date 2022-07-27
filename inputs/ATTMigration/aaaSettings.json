@@ -1,0 +1,13 @@
+{ "alarms": [
+          {
+            "messageTimeoutSec": 12,
+            "radiusMessageRetries": 12,
+            "serverKeepAliveIntervalMin": 12,
+            "authenticationMethod": "Local Users",
+            "authorizationMethod": "Local Users",
+            "aaaStatus": "On"
+          }
+  ]
+}
+
+

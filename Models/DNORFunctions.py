@@ -122,6 +122,17 @@ def validate_prerequisites_VMs_are_up_and_reachable(dnor,config):
     print(f"response={str(response).strip()}")
     assert str(response).strip()=='/home/dn'
 
+    # cmd = 'sudo sshpass -V'
+    # response = RemoteUtil.execSSHCommands(cmd, config.user,config.password,dnor,config)
+    # if ('not found' in (str(response).strip().lower())):
+    #     cmd2='sudo apt install sshpass'
+    #     RemoteUtil.execSSHCommands(cmd2, config.user, config.password, dnor, config)
+
+    response = RemoteUtil.execSSHCommands(cmd, config.user, config.password, dnor, config)
+    assert ('not found' not in (str(response).strip().lower()))
+
+
+
 def validate_dnor_is_Cold_statu(dnor,config):
     cmd = f'sudo docker service ls | grep 1/1 | wc -l'
     response = RemoteUtil.execSSHCommands(cmd, config.user, config.password, dnor, config)

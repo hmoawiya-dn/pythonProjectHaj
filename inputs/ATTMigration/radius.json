@@ -1,0 +1,12 @@
+{ "radius": [
+    {
+      "description": "Radius01",
+      "ip": "100.64.14.193",
+      "port": "1812",
+      "secretKey": "radius",
+      "serviceId": "",
+      "status": "Available",
+      "type": "Radius"
+    }
+  ]
+}

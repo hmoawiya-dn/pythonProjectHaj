@@ -1,0 +1,21 @@
+{ "ncegroups":
+  [
+    {
+      "name": "NewNCEUsersGroup",
+      "users":
+      [
+        {
+          "username": "dnroot",
+          "password": "dnroot",
+          "authType": "localUser"
+        },
+        {
+          "username": "iadmin",
+          "password": "iadmin",
+          "authType": "tripleA"
+        }
+      ],
+      "readOnly": false
+    }
+  ]
+}

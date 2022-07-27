@@ -1,0 +1,13 @@
+{ "tacacs": [
+    {
+      "description": "Tacacs01",
+      "ip": "100.64.14.191",
+      "port": "4949",
+      "secretKey": "testing123",
+      "serviceId": "",
+      "status": "Pending",
+      "type": "Tacacs",
+      "timeout" : 5
+    }
+  ]
+}

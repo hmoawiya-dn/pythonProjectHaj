@@ -9,19 +9,21 @@ class RemoteUtil:
     def execSSHCommands(commandLine, user, password, server, config, port="2222"):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        #commandLineNew = f'sshpass -p {password} {commandLine}'
         print(f"Executing on {user}@${server} command: " + commandLine)
 
         try:
             ssh.connect(server, port, user, password)
         except Exception as e:
             print(f"Failed to connect to {server} Error = {e}")
-            if 'unable to connect' or 'error' or 'failed' in str(e).lower():
+            if 'unable to connect' or 'error' or 'failed' or 'connection refused' in str(e).lower():
                 try:
                     print(f"Failed to connect trying with port {config.ConnectionPort}")
                     ssh.connect(server, config.ConnectionPort, user, password)
                 except Exception as e:
                     print(f"Failed to connect to {server} Error = {e}")
                     return "Connection to the server failed"
+
 
         stdin, stdout, stderr = ssh.exec_command(commandLine, get_pty=True)
         output=""

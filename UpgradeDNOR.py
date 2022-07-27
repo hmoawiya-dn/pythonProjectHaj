@@ -5,8 +5,8 @@ from Models import Functions, DNORFunctions
 from Models.RemoteUtil import *
 from Models.Config import Config
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-17.0.0/dnor_release.17.0.0.4-fd1b2dc9bf.tar'
-config = Config(dnor='dn02')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.3/dnor_release.14.2.3.7-69542aa143.tar'
+config = Config(dnor='dn38-sys1-dn40')
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason=f"need to have scondary dnor configured on dnor.proprerties file")
 def test01_Validate_Secondary_DNOR_is_in_Cold():
@@ -16,7 +16,6 @@ def test01_Validate_Secondary_DNOR_is_in_Cold():
 def test02_Validate_Tertiary_DNOR_is_in_Cold():
     DNORFunctions.validate_dnor_is_Cold_statu(config.tertiaryDNOR,config)
 
-@pytest.mark.dependency()
 def test03_Downloading_TAR_file_and_Extract_it_to_The_Primary_DNOR():
     versionFilenmae = Functions.checkIfVersionExist(config, config.primaryDNOR, versionLink)
     DNORFunctions.extract_tar_file_on_DNOR(versionFilenmae, config.primaryDNOR, config)
@@ -31,15 +30,13 @@ def test05_Downloading_TAR_file_and_Extract_it_to_The_Tertiary_DNOR():
     versionFilenmae = Functions.checkIfVersionExist(config, config.tertiaryDNOR, versionLink)
     DNORFunctions.extract_tar_file_on_DNOR(versionFilenmae, config.tertiaryDNOR, config)
 
-@pytest.mark.dependency(depends=['test03_Downloading_TAR_file_and_Extract_it_to_The_Primary_DNOR'])
+#@pytest.mark.dependency(depends=['test03_Downloading_TAR_file_and_Extract_it_to_The_Primary_DNOR'])
 def test06_Installing_and_upgrading_The_Primary_DNOR():
     DNORFunctions.install_dnor(config.primaryDNOR, config)
 
-@pytest.mark.dependency(depends=['test06_Installing_and_upgrading_The_Primary_DNOR'])
 def test07_Validate_all_services_are_UP_PrimaryDNOR():
     assert Functions.waitingforservices(config.primaryDNOR,config)
 
-@pytest.mark.dependency(depends=['test06_Installing_and_upgrading_The_Primary_DNOR'])
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
 def test08_Installing_and_upgrading_The_Secondary_DNOR():
     DNORFunctions.install_dnor(config.secondaryDNOR, config)

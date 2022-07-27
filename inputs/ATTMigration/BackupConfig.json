@@ -1,0 +1,15 @@
+{ "configs": [
+          {
+            "autoBackup": true,
+            "backupAmount": "5",
+            "backupSchedule": {
+                "day": "Sunday",
+                "hour": 13,
+                "minute": 30,
+                "timeFrame": "Weekly"
+                }
+          }
+  ]
+}
+
+
