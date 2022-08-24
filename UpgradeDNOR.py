@@ -5,8 +5,8 @@ from Models import Functions, DNORFunctions
 from Models.RemoteUtil import *
 from Models.Config import Config
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.2.3/dnor_release.14.2.3.7-69542aa143.tar'
-config = Config(dnor='dn38-sys1-dn40')
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-17.1.0/dnor_dev.17.1.0.102-81b08c40b1.tar'
+config = Config(dnor='dn48')
 
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason=f"need to have scondary dnor configured on dnor.proprerties file")
 def test01_Validate_Secondary_DNOR_is_in_Cold():
@@ -41,12 +41,12 @@ def test07_Validate_all_services_are_UP_PrimaryDNOR():
 def test08_Installing_and_upgrading_The_Secondary_DNOR():
     DNORFunctions.install_dnor(config.secondaryDNOR, config)
 
-@pytest.mark.dependency(depends=['test08_Installing_and_upgrading_The_Secondary_DNOR'])
+
 @pytest.mark.skipif((config.secondaryDNOR=='na') or (not config.secondaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
 def test09_Validate_all_services_are_UP_SecondaryDNOR():
     DNORFunctions.validate_dnor_is_Cold_statu(config.secondaryDNOR,config)
 
-@pytest.mark.dependency(depends=['test08_Installing_and_upgrading_The_Secondary_DNOR'])
+
 @pytest.mark.skipif((config.tertiaryDNOR=='na') or (not config.tertiaryDNOR), reason="need to have scondary dnor configured on dnor.proprerties file")
 def test10_Installing_and_upgrading_The_Tertiary_DNOR():
     DNORFunctions.install_dnor(config.tertiaryDNOR, config)

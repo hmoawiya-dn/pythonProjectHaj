@@ -1,0 +1,15 @@
+{ "sites": [
+    {
+      "address": "Taibee",
+      "city": "Taibee",
+      "groupId": "",
+      "id": null,
+      "lat": "1",
+      "lng":"1",
+      "name": "NewSiteTest",
+      "region":"Merkaz",
+      "state":"Israel",
+      "zip": "404000"
+    }
+  ]
+}

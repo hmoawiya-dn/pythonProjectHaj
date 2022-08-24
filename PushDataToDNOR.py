@@ -12,17 +12,19 @@ from Models.postgresUtil import postgresUtil
 import yaml
 
 versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-14.1.2/dnor_release.14.1.2.25-e874db7b47.tar'
-dnorVersion = "V14"
-config = Config(dnor='dn36')
+dnorVersion = "V17"
+config = Config(dnor='dn06')
+usersAmount = 1000
+sitesAmount = 1000
 
-@pytest.mark.addinputs
+@pytest.mark.addinputs1
 def test01_load_yamls_files():
     global apiurls
     with open(f'API_URLS/{dnorVersion}/API_urls.yaml') as file:
         apiurls = yaml.load(file,Loader=yaml.FullLoader)
     assert (apiurls)
 
-@pytest.mark.addinputs
+@pytest.mark.addinputs1
 def test02_getting_authorizationToken():
     global authorizationToken
     print('getting authorizationToken')
@@ -40,13 +42,20 @@ def test03_add_users_to_DNOR():
     global authorizationToken
     print(f'authorizationToken={authorizationToken}')
     url = f'https://{config.primaryDNOR}{apiurls.get("add_users_url")}'
-    users = open(f'inputs/ATTMigration/users.json')
+    users = open(f'inputs/Scale/{dnorVersion}/users/users.json')
     data = json.load(users)
-    for user in data['dnorusers']:
-        print(f'request = {user}')
-        response = RestAPIUtil.postAPIrequest(url, user,authorizationToken)
-        assert (response['success'] == True)
-        time.sleep(5)
+    for i in range(usersAmount):
+        for user in data['dnorusers']:
+            #print('%03d' % i)
+            newReq = user.copy()
+            print('%03d' % i)
+            userNew = (f"{user['username']}"+'%03d' % i)
+            newReq['username'] = userNew
+            print(f'request = {newReq}')
+            #print(f'request = {user}')
+            response = RestAPIUtil.postAPIrequest(url, newReq,authorizationToken)
+            assert (response['success'] == True)
+            time.sleep(5)
 
 @pytest.mark.addinputs
 def test04_add_images_to_DNOR():
@@ -68,10 +77,10 @@ def test04_add_images_to_DNOR():
             continue
         time.sleep(5)
 
-@pytest.mark.addinputs
+@pytest.mark.addinputs1
 def test05_add_sites_to_DNOR():
     global authorizationToken
-    sites = open(f'inputs/ATTMigration/sites.json')
+    sites = open(f'inputs/Scale/{dnorVersion}/sites/sites.json')
     data = json.load(sites)
     url = f'https://{config.primaryDNOR}{apiurls.get("add_sites_url")}'
     if (apiurls.get("site_group")):
