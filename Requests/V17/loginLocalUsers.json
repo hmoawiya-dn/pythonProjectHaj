@@ -1,0 +1,6 @@
+{
+  "username": "superadmin",
+  "password": "superadmin",
+  "readOnly": true,
+  "reLogin" : false
+}

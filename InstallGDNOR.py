@@ -11,9 +11,9 @@ from Models.RestAPIUtil import *
 from Models.postgresUtil import postgresUtil
 import yaml
 
-versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-17.1.0/dnor_release.17.1.0.5-d556d3dac7.tar'
-dnorVersion = "V17"
-gdnor = False
+versionLink = 'http://minioio.dev.drivenets.net:9000/dnor/comet-dnor-rel-17.0.0/dnor_release.17.0.0.8-a5ed359840.tar'
+gdnorVersion = "V17"
+
 config = Config(dnor='dn060607')
 
 def test01_Validate_prerequisites_VMs_are_up_and_reachable_Primary_VM():
@@ -214,21 +214,25 @@ def test32_Enable_NGINX_for_Secondary_DNOR():
     DNORFunctions.enable_NGINX_for_DNOR(config.secondaryDNOR, config)
 
 
+
+
+
+
+
+
+
 @pytest.mark.addinputs1
-@pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test33_load_yamls_files():
     global apiurls
-    with open(f'API_URLS/{dnorVersion}/API_urls.yaml') as file:
+    with open(f'API_URLS/GDNOR/{gdnorVersion}/API_urls.yaml') as file:
         apiurls = yaml.load(file,Loader=yaml.FullLoader)
     assert (apiurls)
 
-
 @pytest.mark.addinputs1
-@pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
 def test34_getting_authorizationToken():
     global authorizationToken
     print('getting authorizationToken')
-    jsonfile = open(f'Requests/{dnorVersion}/loginRequestBody.json')
+    jsonfile = open(f'Requests/GDNOR/{gdnorVersion}/loginRequestBody.json')
     loginrequest = json.load(jsonfile)
     print(f"login request = {loginrequest}")
     url = f'https://{config.primaryDNOR}{apiurls.get("login_request_url")}'
@@ -238,12 +242,16 @@ def test34_getting_authorizationToken():
     assert (authorizationToken)
 
 @pytest.mark.addinputs1
-@pytest.mark.skipif((bool(gdnor)), reason="Installing GDNOR")
-def test35_add_users_to_DNOR():
+def test35_getting_organizationId_from_dataBase():
+    cmd = 'select '
+
+
+@pytest.mark.addinputs1
+def test35_add_users_to_GDNOR_DN_Level():
     global authorizationToken
     print(f'authorizationToken={authorizationToken}')
-    url = f'https://{config.primaryDNOR}{apiurls.get("add_users_url")}'
-    users = open(f'inputs/users/{dnorVersion}/users.json')
+    url = f'https://{config.primaryDNOR}{apiurls.get("add_DN_level_users_url")}'
+    users = open(f'inputs/users/{gdnorVersion}/users.json')
     data = json.load(users)
     for user in data['dnorusers']:
         print(f'request = {user}')

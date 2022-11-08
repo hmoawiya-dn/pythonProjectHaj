@@ -102,7 +102,7 @@ def enable_NGINX_for_DNOR(dnor,config):
     assert ('signal process started' in response3)
 
 def validate_prerequisites_VMs_are_up_and_reachable(dnor,config):
-    cmd = f'sudo virsh list --all | grep {dnor}'
+    cmd = f'sudo virsh list --all | grep -w {dnor}'
     dnorHost = str(dnor).split('-')[0]
     response = RemoteUtil.execSSHCommands(cmd, config.HostUser, config.HostPassword, dnorHost, config)
     response = response.split()[-1]
